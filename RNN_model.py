@@ -41,7 +41,7 @@ values = df.values
 #Check if the data is correct
 Check_df=pd.DataFrame({"Y":df.Y,"Y-t":df.iloc[:,1:].sum(axis=1)})
 
-n_train_time = int(np.floor(0.8*df.shape[0]))
+n_train_time = int(np.floor(0.5*df.shape[0]))
 train = values[:n_train_time, :]
 test = values[n_train_time:, :]
 ##test = values[n_train_time:n_test_time, :]
@@ -55,16 +55,16 @@ print(train_X.shape, train_y.shape, test_X.shape, test_y.shape)
 # We reshaped the input into the 3D format as expected by LSTMs, namely [samples, timesteps, features].
 
 
-
 # design network
 model = Sequential()
-model.add(LSTM(50,input_shape=(train_X.shape[1], train_X.shape[2]),return_sequences=True))
+#model.add(LSTM(50,input_shape=(train_X.shape[1], train_X.shape[2]),return_sequences=True))
+model.add(LSTM(50,input_shape=(train_X.shape[1], train_X.shape[2])))
 model.add(Dropout(0.2))
-model.add(LSTM(250))
+#model.add(LSTM(250))
 model.add(Dense(1))
 model.compile(loss='mae', optimizer='adam')
 # fit network
-history = model.fit(train_X, train_y, epochs=100, batch_size=20, validation_data=(test_X, test_y), verbose=2, shuffle=False)
+history = model.fit(train_X, train_y, epochs=25, batch_size=70, validation_data=(test_X, test_y), verbose=2, shuffle=False)
 
 # summarize history for loss
 plt.plot(history.history['loss'])
