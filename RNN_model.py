@@ -92,3 +92,6 @@ inv_y = inv_y[:,0]
 rmse = np.sqrt(mean_squared_error(inv_y, inv_yhat))
 print('Test RMSE: %.3f' % rmse)
 
+
+##This is jack
+#Jack Local
