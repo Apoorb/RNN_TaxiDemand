@@ -33,7 +33,7 @@ df=df.rename(columns={"totaltrips":"NumTrips"})
 
 
 # Get 8th day from the new year
-d = date(2016, 1, 8)                    # January 8th
+d = date(2016, 1, 1)                    # January 8th
 df=df[(df.index>=str(d))]
 d2=date(2016,12,31)
 # Fill missing dates
